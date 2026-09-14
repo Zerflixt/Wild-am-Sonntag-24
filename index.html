@@ -268,7 +268,7 @@ body {
   align-items: flex-start;
   justify-content: center;
   transform-origin: 0 0;
-  will-change: transform;
+ /* will-change: transform;*/
 }
 
 #zeitungsbuch {
@@ -294,6 +294,7 @@ body {
   padding: 0 !important;
   object-fit: contain;
   object-position: center center;
+  
   vertical-align: top;
   user-select: none;
   -webkit-user-drag: none;
@@ -891,14 +892,20 @@ console.log(
     );
   };
 
-  const zeichneZoom = function () {
-    begrenzeZoomVersatz();
-    zoomEbene.style.transform =
-      "translate3d(" +
-      zoomVersatzX + "px, " +
-      zoomVersatzY + "px, 0) scale(" +
-      zoomFaktor + ")";
-  };
+const zeichneZoom = function () {
+  begrenzeZoomVersatz();
+
+  if (zoomFaktor === 1) {
+    zoomEbene.style.transform = "none";
+    return;
+  }
+
+  zoomEbene.style.transform =
+    "translate3d(" +
+    zoomVersatzX + "px, " +
+    zoomVersatzY + "px, 0) scale(" +
+    zoomFaktor + ")";
+};
 
   // Vergrößert um einen Bildschirm-Punkt, damit dieser unter Maus/Fingern bleibt.
   const zoomeUmBildschirmPunkt = function (
